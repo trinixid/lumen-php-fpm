@@ -1,21 +1,19 @@
 FROM php:7.1-fpm-alpine
 
-MAINTAINER asri djufri <asri@trinix.id>
+MAINTAINER Moose wings <pd@urb-it.com>
 
-
-#PHP
+# PHP
 ADD ./logging.ini /usr/local/etc/php/conf.d
-ADD ./lumen.ini   /usr/local/etc/php/conf.d
+ADD ./lumen.ini /usr/local/etc/php/conf.d
 
-#PHP-FPM
+# PHP-FPM
 ADD ./lumen.pool.conf /usr/local/etc/php-fpm.d
 RUN rm /usr/local/etc/php-fpm.d/www.conf*
 
-#ENVIRONMENT VARIABLE
-
+# Environment variables
 ENV ALPINE_VERSION 3.4
 ENV PHP_API_VERSION 20160303
-#ENV IMAGICK_VERSION=3.4.3
+ENV IMAGICK_VERSION=3.4.3
 # ENV AMQP_VERSION=1.8.0
 ENV MONGODB_VERSION=1.2.5
 ENV LOG_STREAM="/tmp/stdout"
@@ -25,7 +23,6 @@ RUN apk --no-cache --update --repository http://dl-cdn.alpinelinux.org/alpine/v$
     autoconf \
     build-base \
     ca-certificates \
-
 && apk --no-cache --update --repository http://dl-3.alpinelinux.org/alpine/v3.5/main/ add \
     curl \
     openssl \
